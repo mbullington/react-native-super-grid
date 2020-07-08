@@ -165,7 +165,7 @@ const SectionGrid = memo(
 
     const localKeyExtractor = useCallback(
       (rowItems, index) => {
-        if (keyExtractor) {
+        if (keyExtractor && rowItems) {
           return rowItems
             .map((rowItem, rowItemIndex) => keyExtractor(rowItem, rowItemIndex))
             .join('_');
