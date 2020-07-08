@@ -132,16 +132,22 @@ const SectionGrid = memo(
 
         return {
           ...section,
-          renderItem: ({ item, index, section }) => renderRow({
-            renderItem,
-            rowItems: item,
-            rowIndex: index,
-            section,
-            isFirstRow: index === 0,
-            itemsPerRow,
-            rowStyle,
-            containerStyle,
-          }),
+          renderItem: ({ item, index, section: itemSection }) => {
+            if (item == null || index == null) {
+              return null;
+            }
+
+            return renderRow({
+              renderItem,
+              rowItems: item,
+              rowIndex: index,
+              section: itemSection,
+              isFirstRow: index === 0,
+              itemsPerRow,
+              rowStyle,
+              containerStyle,
+            });
+          },
           data: chunkedData,
           originalData: section.data,
         };
