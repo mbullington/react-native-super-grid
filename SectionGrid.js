@@ -133,7 +133,7 @@ const SectionGrid = memo(
         return {
           ...section,
           renderItem: ({ item, index, section: itemSection }) => {
-            if (item == null || index == null) {
+            if (item == null || typeof item.map !== "function" || index == null) {
               return null;
             }
 
@@ -165,7 +165,7 @@ const SectionGrid = memo(
 
     const localKeyExtractor = useCallback(
       (rowItems, index) => {
-        if (keyExtractor && rowItems) {
+        if (keyExtractor && rowItems && typeof rowItems.map === "function") {
           return rowItems
             .map((rowItem, rowItemIndex) => keyExtractor(rowItem, rowItemIndex))
             .join('_');
